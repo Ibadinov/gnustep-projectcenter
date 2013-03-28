@@ -107,9 +107,9 @@ static PCAddFilesPanel *addFilesPanel = nil;
 {
   NSString  *category = [fileTypePopup titleOfSelectedItem];
 
-  if ([_delegate respondsToSelector:@selector(categoryChangedTo:)])
+  if ([[self delegate] respondsToSelector:@selector(categoryChangedTo:)])
     {
-      [_delegate categoryChangedTo:category];
+      [[self delegate] categoryChangedTo:category];
     }
 }
 

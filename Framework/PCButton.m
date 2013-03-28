@@ -86,7 +86,7 @@
 {
   // If retain count is number of tracking rects + superview retain,
   // remove tracking rects. It seems that tracking rects retain this object.
-  if (_hasTooltips && [self retainCount] == [_tracking_rects count] + 1)
+  if (_hasTooltips && [self retainCount] == [[self _trackingRects] count] + 1)
     {
       [self removeAllToolTips];
     }
@@ -110,11 +110,12 @@
     {
       return;
     }
-    
-  j = [_tracking_rects count];
+  
+  NSArray *trackingRects = [self _trackingRects];
+  j = [trackingRects count];
   for (i = 0; i < j; i++)
     {
-      tr = [_tracking_rects objectAtIndex:i];
+      tr = [trackingRects objectAtIndex:i];
       
       // Save tooltip string for next addTrackingRect::::
       string = [(NSString *)tr->user_data copy];

@@ -61,8 +61,11 @@
 #endif
 
 
-#if !(defined (__NetBSD__)) && !(defined (__SOLARIS__)) && !(defined (__OpenBSD__)) && !(defined(__FreeBSD__))
+#if !(defined (__NetBSD__)) && !(defined (__SOLARIS__)) && !(defined (__OpenBSD__)) && !(defined(__FreeBSD__)) && !(defined(__APPLE__))
 #  include <pty.h>
+#endif
+#if defined (__APPLE__)
+#  include <util.h>
 #endif
 
 #import "PTYView.h"

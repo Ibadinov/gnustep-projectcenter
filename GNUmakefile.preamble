@@ -41,11 +41,17 @@ ADDITIONAL_INCLUDE_DIRS += -I./ -I./Headers
 # Additional LDFLAGS to pass to the linker
 ADDITIONAL_LDFLAGS += 
 
-# Additional library directories the linker should search
-ADDITIONAL_LIB_DIRS += -L./Framework/ProjectCenter.framework/$(GNUSTEP_TARGET_LDIR)
-
-# Additional LDFLAGS to pass to the linker
-ADDITIONAL_GUI_LIBS += -lProjectCenter
+ifeq ($(findstring darwin, $(GNUSTEP_TARGET_OS)), darwin)
+    # Additional library directories tihe linker should search
+    ADDITIONAL_LIB_DIRS += -F./Framework/
+    # Additional LDFLAGS to pass to the linker
+    ADDITIONAL_GUI_LIBS += -framework ProjectCenter
+else
+    # Additional library directories tihe linker should search
+    ADDITIONAL_LIB_DIRS += -L./Framework/ProjectCenter.framework/$(GNUSTEP_TARGET_LDIR)
+    # Additional LDFLAGS to pass to the linker
+    ADDITIONAL_GUI_LIBS += -lProjectCenter
+endif
 
 #
 # Flags dealing with installing and uninstalling
